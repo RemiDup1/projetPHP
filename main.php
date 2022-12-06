@@ -1,30 +1,28 @@
 <?php
-    $bdd= "roose"; // Base de données 
+    $bdd= "rdupin001_bd"; // Base de données 
     $host= "lakartxela.iutbayonne.univ-pau.fr";
-    $user= "roose"; // Utilisateur 
-    $pass= "roose"; // mp
+    $user= "rdupin001_bd"; // Utilisateur 
+    $pass= "rdupin001_bd"; // mp
 
-    $nomtable= "bourse"; /* Connection bdd */ 
-    //print "Tentative de connexion sur sitebd<br>";
+    $nomtable= "cd"; /* Connection bdd */ 
     
+    $link=mysqli_connect($host,$user,$pass,$bdd) or die("Impossible de se connecter à la BD");
+
     try
     {
-        $connexion = new PDO ('mysql:host='.$host.';dbname='.$bdd, $user,$pass);
-        $resultats=$connexion->query("SELECT * FROM bourse order by ville "); 
-        /*
-        while( $tuple = $resultats->fetch() ) {
-            echo 'ville : '.$tuple->ville.', indice : '.$tuple->indice.'<br />';
-        }
-        */
-    } // fin try
+        $query="SELECT * FROM cd";
+        $result=mysqli_query($link,$query);
+    }
+    
     catch(Exception $e){
         echo 'Erreur : '.$e->getMessage().'<br />';
     }
 
-
-    $createurs = $resultats->fetchAll(PDO::FETCH_OBJ);
-    while( $tuple = next($createurs) ) {
-        echo '<h3>'.'Ville : '. $tuple ->ville . ', Indice : '. $tuple ->indice.'</h3>';
+    while($donnees=mysqli_fetch_assoc($result)){
+        $id=$donnees["id"];
+        $titre=$donnees["titre"];
+        echo '<h3>'.'Titre : '. $titre . ', Indice : '. $id.'</h3>';
     }
 
+    mysqli_close($link);
 ?>
