@@ -34,9 +34,13 @@
             $titre=$donnees["titre"];
             $auteur=$donnees["auteur"];
             $prix=$donnees["prix"];
-            $img=$donnees["img"];
-            echo('<img src = pochettes/'.$img.' height="50" widht="50"></img>');
-            echo ('<div class = ele1>'.$titre.'</div>'); 
+            $imgPochette=$donnees["img"];
+            $img = imagecreatefromjpeg('pochettes/'.$imgPochette);
+            $img = imagescale( $img, 50, 50 );
+            $imgVignette = 'vignettes/'.$imgPochette;
+            imagejpeg($img,$imgVignette);
+            echo('<img src = '.$imgVignette.'></img>');
+            echo ('<div class = ele1>'.$titre.'</div>');
             echo ('<div class = ele2>'.$auteur.'</div>');
             echo ('<div class = ele3>'.$prix.' €</div>') ;
             echo ('</section>');
