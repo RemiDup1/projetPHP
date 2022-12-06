@@ -21,7 +21,11 @@
     while($donnees=mysqli_fetch_assoc($result)){
         $id=$donnees["id"];
         $titre=$donnees["titre"];
-        echo '<h3>'.'Titre : '. $titre . ', Indice : '. $id.'</h3>';
+        $auteur=$donnees["auteur"];
+        $prix=$donnees["prix"];
+        $img=$donnees["img"];
+        echo('<img src = pochettes/'.$img.' height="50" widht="50"></img>');
+        echo ''. $titre . '    |   '. $auteur.'    |   '. $prix.' € </h3>';
     }
 
     mysqli_close($link);
