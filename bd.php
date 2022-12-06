@@ -18,15 +18,7 @@
         echo 'Erreur : '.$e->getMessage().'<br />';
     }
 
-    while($donnees=mysqli_fetch_assoc($result)){
-        $id=$donnees["id"];
-        $titre=$donnees["titre"];
-        $auteur=$donnees["auteur"];
-        $prix=$donnees["prix"];
-        $img=$donnees["img"];
-        echo('<img src = pochettes/'.$img.' height="50" widht="50"></img>');
-        echo ''. $titre . '    |   '. $auteur.'    |   '. $prix.' € </h3>';
-    }
+    
 
     mysqli_close($link);
 ?>
