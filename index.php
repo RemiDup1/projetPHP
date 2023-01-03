@@ -1,5 +1,3 @@
-session_start();
-
 <!DOCTYPE html>
 
 <?php 
@@ -48,6 +46,7 @@ session_start();
             echo ('<div class = ele3>'.$prix.' €</div>') ;
             echo('</button>');
             echo ('</a>');
+            echo ('</section>');
         }
         ?>
 	</main>
