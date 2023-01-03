@@ -1,0 +1,10 @@
+body{
+    margin-left: 10px;
+}
+
+.articles{
+    border-style: outset;
+    margin-top: 20px;
+    margin-right: 80%;
+    background-color: gainsboro;
+}
