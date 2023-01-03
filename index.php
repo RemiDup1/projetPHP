@@ -1,3 +1,5 @@
+session_start();
+
 <!DOCTYPE html>
 
 <?php 
@@ -30,6 +32,7 @@
         <?php
         while($donnees=mysqli_fetch_assoc($result)){
             echo('<section class="articles">');
+            echo('<a href="./selectionner.php">');
             $id=$donnees["id"];
             $titre=$donnees["titre"];
             $auteur=$donnees["auteur"];
@@ -43,7 +46,8 @@
             echo ('<div class = ele1>'.$titre.'</div>');
             echo ('<div class = ele2>'.$auteur.'</div>');
             echo ('<div class = ele3>'.$prix.' €</div>') ;
-            echo ('</section>');
+            echo('</button>');
+            echo ('</a>');
         }
         ?>
 	</main>
