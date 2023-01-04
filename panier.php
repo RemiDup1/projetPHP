@@ -9,55 +9,37 @@
 </head>
 <body>
     <?php
-/*
-    include 'bd.php';
-    while($donnees=mysqli_fetch_assoc($result)){
-        if ($donnees["panier"] == 1) {
-            
-            echo('<section class="articles">');
-            echo('<form method="post">');
-            $id=$donnees["id"];
-            $titre=$donnees["titre"];
-            $auteur=$donnees["auteur"];
-            $prix=$donnees["prix"];
-            $imgPochette=$donnees["img"];
-            $imgVignette = 'vignettes/'.$imgPochette;
-            echo('<img src = '.$imgVignette.'></img>');
-            echo ('<div class = ele1>'.$titre.'</div>');
-            echo ('<div class = ele2>'.$auteur.'</div>');
-            echo ('<div class = ele3>'.$prix.' €</div>') ;
-            
-            echo('<input type="submit" name="'.$id.'" class="button" value="'.$id.'"/>'); 
-            echo('</form>');
-            echo ('</section>');
-        }
-    }
-    */
+
 
     include 'bd.php';
 
 $query2='SELECT * FROM cd where panier = 1';
 $resultat=mysqli_query($link, $query2);
 
-while($donnees=mysqli_fetch_assoc($resultat)){
-    echo('<form method="post">');
-    $id=$donnees["id"];
-    $titre=$donnees["titre"];
-    $auteur=$donnees["auteur"];
-    $prix=$donnees["prix"];
-    $imgPochette=$donnees["img"];
-    $img = 'vignettes/'.$imgPochette;
-    echo('<img src = '.$img.'></img>');
-    echo ('<div class = ele1>'.$titre.'</div>');
-    echo ('<div class = ele2>'.$auteur.'</div>');
-    echo ('<div class = ele3>'.$prix.' €</div>') ;  
-    echo ('<input type="hidden" name="'.$id.'" value="'.$id.'">');
-    echo('<input type="submit" value="Retirer du panier"/>'); 
-    echo('</form>'); 
+$rowcount=mysqli_num_rows($resultat);
+echo($rowcount);
+if ($rowcount==0) {
+    echo "<script>alert('Panier Vide');
+        window.location.href='./index.php';
+        </script>";
+}else {
+    while($donnees=mysqli_fetch_assoc($resultat)){
+        echo('<form method="post">');
+        $id=$donnees["id"];
+        $titre=$donnees["titre"];
+        $auteur=$donnees["auteur"];
+        $prix=$donnees["prix"];
+        $imgPochette=$donnees["img"];
+        $img = 'vignettes/'.$imgPochette;
+        echo('<img src = '.$img.'></img>');
+        echo ('<div class = ele1>'.$titre.'</div>');
+        echo ('<div class = ele2>'.$auteur.'</div>');
+        echo ('<div class = ele3>'.$prix.' €</div>') ;  
+        echo ('<input type="hidden" name="'.$id.'" value="'.$id.'">');
+        echo('<input type="submit" value="Retirer du panier"/>'); 
+        echo('</form>'); 
+    }
 }
- 
-
-
 
     if(array_key_exists($id, $_POST)) {
         button1();
