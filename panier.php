@@ -63,10 +63,12 @@ function button1() {
     global $id, $link;
     $sql ='UPDATE cd SET panier=0 WHERE id="'.$id.'"';
     $resultat=mysqli_query($link, $sql);
-    echo "<script>alert('Article retiré du panier');</script>";
+    echo "<script>alert('Article retiré du panier');
+    window.location.href='./index.php';
+    </script>";
 }
-
 ?>
+
 
 <BR>
 <BR>
@@ -78,6 +80,7 @@ function button1() {
 
         <INPUT TYPE = "SUBMIT" VALUE = "VALIDER">
 </FORM>
+
 
 </body>
 </html>
