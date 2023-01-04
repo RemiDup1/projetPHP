@@ -8,7 +8,6 @@
     <title>Panier</title>
 </head>
 <body>
-    <h1>Panier</h1>
     <?php
 /*
     include 'bd.php';
@@ -52,7 +51,8 @@ while($donnees=mysqli_fetch_assoc($resultat)){
     echo ('<div class = ele1>'.$titre.'</div>');
     echo ('<div class = ele2>'.$auteur.'</div>');
     echo ('<div class = ele3>'.$prix.' €</div>') ;  
-    echo('<input type="submit" name="'.$id.'" class="button" value="'.$id.'"/>'); 
+    echo ('<input type="hidden" name="'.$id.'" value="'.$id.'">');
+    echo('<input type="submit" value="Retirer du panier"/>'); 
     echo('</form>'); 
 }
  
@@ -60,15 +60,12 @@ while($donnees=mysqli_fetch_assoc($resultat)){
 
 
     if(array_key_exists($id, $_POST)) {
-        echo "<script>alert('1');</script>";
         button1();
         
     }
 
     function button1() {
-        echo "<script>alert('2');</script>";
         global $id, $link;
-        echo($id);
         $sql ='UPDATE cd SET panier=0 WHERE id="'.$id.'"';
         $resultat=mysqli_query($link, $sql);
         echo "<script>alert('Article retiré du panier');</script>";
