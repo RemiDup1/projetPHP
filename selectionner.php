@@ -20,17 +20,20 @@ while($donnees=mysqli_fetch_assoc($resultat)){
     echo ('<div class = ele1>'.$titre.'</div>');
     echo ('<div class = ele2>'.$auteur.'</div>');
     echo ('<div class = ele3>'.$prix.' €</div>') ;  
-    echo('<input type="submit" name="button1" class="button" value="Button1" />'); 
+    echo('<input type="submit" name="'.$id.'" class="button" value="'.$id.'"/>'); 
     echo('</form>'); 
 }
 
 
-if(array_key_exists('button1', $_POST)) {
+if(array_key_exists($id, $_POST)) {
     button1();
 }
 
 function button1() {
-    $sql ='UPDATE cd SET panier=0 WHERE id=2';
+    global $idArticle, $link;
+    echo($idArticle);
+    $sql ='UPDATE cd SET panier=1 WHERE id="'.$idArticle.'"';
+    $resultat=mysqli_query($link, $sql);
     echo "<script>alert('Fonction dans panier appelé');</script>";
 }
 

@@ -10,28 +10,69 @@
 <body>
     <h1>Panier</h1>
     <?php
-
+/*
     include 'bd.php';
     while($donnees=mysqli_fetch_assoc($result)){
         if ($donnees["panier"] == 1) {
+            
             echo('<section class="articles">');
+            echo('<form method="post">');
             $id=$donnees["id"];
             $titre=$donnees["titre"];
             $auteur=$donnees["auteur"];
             $prix=$donnees["prix"];
             $imgPochette=$donnees["img"];
-            $img = imagecreatefromjpeg('pochettes/'.$imgPochette);
-            $img = imagescale( $img, 50, 50 );
             $imgVignette = 'vignettes/'.$imgPochette;
-            imagejpeg($img,$imgVignette);
             echo('<img src = '.$imgVignette.'></img>');
             echo ('<div class = ele1>'.$titre.'</div>');
             echo ('<div class = ele2>'.$auteur.'</div>');
             echo ('<div class = ele3>'.$prix.' €</div>') ;
+            
+            echo('<input type="submit" name="'.$id.'" class="button" value="'.$id.'"/>'); 
+            echo('</form>');
             echo ('</section>');
         }
     }
+    */
 
+    include 'bd.php';
+
+$query2='SELECT * FROM cd where panier = 1';
+$resultat=mysqli_query($link, $query2);
+
+while($donnees=mysqli_fetch_assoc($resultat)){
+    echo('<form method="post">');
+    $id=$donnees["id"];
+    $titre=$donnees["titre"];
+    $auteur=$donnees["auteur"];
+    $prix=$donnees["prix"];
+    $imgPochette=$donnees["img"];
+    $img = 'vignettes/'.$imgPochette;
+    echo('<img src = '.$img.'></img>');
+    echo ('<div class = ele1>'.$titre.'</div>');
+    echo ('<div class = ele2>'.$auteur.'</div>');
+    echo ('<div class = ele3>'.$prix.' €</div>') ;  
+    echo('<input type="submit" name="'.$id.'" class="button" value="'.$id.'"/>'); 
+    echo('</form>'); 
+}
+ 
+
+
+
+    if(array_key_exists($id, $_POST)) {
+        echo "<script>alert('1');</script>";
+        button1();
+        
+    }
+
+    function button1() {
+        echo "<script>alert('2');</script>";
+        global $id, $link;
+        echo($id);
+        $sql ='UPDATE cd SET panier=0 WHERE id="'.$id.'"';
+        $resultat=mysqli_query($link, $sql);
+        echo "<script>alert('Article retiré du panier');</script>";
+    }
     ?>
 </body>
 </html>
