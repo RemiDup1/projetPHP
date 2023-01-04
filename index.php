@@ -19,7 +19,7 @@
 		<nav>
             <h2>/*Le Nom du site Web*/</h2>
 			<ul>
-				<li><a href="clear.php">Mon panier</i><a></li>
+				<li><a href="panier.php">Mon panier</i><a></li>
                 <div></div>              
                 
 			</ul>
@@ -50,6 +50,7 @@
             echo ('</form>');
             echo ('</section>');
         }
+        
         ?>
 	</main>
 	<footer>
