@@ -1,39 +1,40 @@
-<!DOCTYPE html>
-
-<?php 
-	include 'bd.php';
-?>
-
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
 <?php
-    while($donnees=mysqli_fetch_assoc($result)){
-            echo('<section class="articles">');
-            echo('<a href="./selectionner.php">');
-            $id=$donnees["id"];
-            $titre=$donnees["titre"];
-            $auteur=$donnees["auteur"];
-            $prix=$donnees["prix"];
-            $imgPochette=$donnees["img"];
-            $img = imagecreatefromjpeg('pochettes/'.$imgPochette);
-            $img = imagescale( $img, 50, 50 );
-            $imgVignette = 'vignettes/'.$imgPochette;
-            imagejpeg($img,$imgVignette);
-            echo('<img src = '.$imgVignette.'></img>');
-            echo ('<div class = ele1>'.$titre.'</div>');
-            echo ('<div class = ele2>'.$auteur.'</div>');
-            echo ('<div class = ele3>'.$prix.' €</div>') ;
-            echo('</button>');
-            echo ('</a>');
-            echo ('</section>');
-        }   
-    
+extract($_POST,EXTR_OVERWRITE);
+foreach ($_POST as $idArticle);
+echo($idArticle);
+
+include 'bd.php';
+
+$query2='SELECT * FROM cd where id = "'.$idArticle.'"';
+$resultat=mysqli_query($link, $query2);
+
+while($donnees=mysqli_fetch_assoc($resultat)){
+    echo('<form method="post">');
+    $id=$donnees["id"];
+    $titre=$donnees["titre"];
+    $auteur=$donnees["auteur"];
+    $prix=$donnees["prix"];
+    $imgPochette=$donnees["img"];
+    $img = 'pochettes/'.$imgPochette;
+    echo('<img src = '.$img.'></img>');
+    echo ('<div class = ele1>'.$titre.'</div>');
+    echo ('<div class = ele2>'.$auteur.'</div>');
+    echo ('<div class = ele3>'.$prix.' €</div>') ;  
+    echo('<input type="submit" name="button1" class="button" value="Button1" />'); 
+    echo('</form>'); 
+}
+
+
+if(array_key_exists('button1', $_POST)) {
+    button1();
+}
+
+function button1() {
+    $sql ='UPDATE cd SET panier=0 WHERE id=2';
+    echo "<script>alert('Fonction dans panier appelé');</script>";
+}
+
+
+
+//$sql ='UPDATE liste_proprietaire SET adresse="3, rue des tulipes", age="65" WHERE nom="Benoît"';
 ?>
-</body>
-</html>

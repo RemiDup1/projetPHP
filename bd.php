@@ -20,5 +20,5 @@
 
     
 
-    mysqli_close($link);
+    //mysqli_close($link);
 ?>

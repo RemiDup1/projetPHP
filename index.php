@@ -26,11 +26,11 @@
 		</nav>
         <hr>
 	</header>
-	<main>
+	<main>    
         <?php
         while($donnees=mysqli_fetch_assoc($result)){
             echo('<section class="articles">');
-            echo('<a href="./selectionner.php">');
+            echo('<form method="post" action="./selectionner.php">');
             $id=$donnees["id"];
             $titre=$donnees["titre"];
             $auteur=$donnees["auteur"];
@@ -44,8 +44,10 @@
             echo ('<div class = ele1>'.$titre.'</div>');
             echo ('<div class = ele2>'.$auteur.'</div>');
             echo ('<div class = ele3>'.$prix.' €</div>') ;
-            echo('</button>');
-            echo ('</a>');
+            echo ('<input type="hidden" name="Disque'.$id.'" value="'.$id.'">');
+            echo(' <input type="submit" value="Voir le détail"> ');
+            
+            echo ('</form>');
             echo ('</section>');
         }
         ?>
