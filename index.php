@@ -1,8 +1,9 @@
-<!DOCTYPE html>
-
 <?php 
 	include 'bd.php';
+    session_start();
 ?>
+
+<!DOCTYPE html>
 
 <html lang="fr">
 <head>
@@ -20,6 +21,20 @@
             <h2>/*Le Nom du site Web*/</h2>
 			<ul>
 				<li><a href="panier.php">Mon panier</i><a></li>
+                <div></div>
+                <li>
+                <?php
+                if($_SESSION['username'] !== ""){
+                    echo '<a href="login/deconnexion.php">Se Deconnecter</i><a>';
+                    }
+                else 
+                {
+                    echo '<a href="login/login.php">Se Connecter</i><a>';
+                }
+                    
+
+                ?>
+                </li>
                 <div></div>              
                 
 			</ul>
@@ -28,6 +43,14 @@
 	</header>
 	<main>    
         <?php
+    
+        if($_SESSION['username'] !== ""){
+        $user = $_SESSION['username'];
+        // afficher un message
+        echo "Bonjour $user, vous êtes connecté";
+        }
+
+
         while($donnees=mysqli_fetch_assoc($result)){
             echo('<section class="articles">');
             echo('<form method="post" action="./selectionner.php">');
