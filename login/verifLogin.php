@@ -27,7 +27,7 @@ $db=mysqli_connect($host,$user,$pass,$bdd) or die("Impossible de se connecter à
  if($count!=0) // nom d'utilisateur et mot de passe correctes
  {
  $_SESSION['username'] = $username;
- echo "<script>alert('Connexion réussi');
+ echo "<script>alert('Connexion réussie');
         window.location.href='../index.php';
     </script>";
  }
